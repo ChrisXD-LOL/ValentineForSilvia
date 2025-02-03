@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day for Silvia</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8e1e1;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ff6f61;
+            color: white;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #ff6f61;
+        }
+
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff4c3b;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        #gameArea {
+            margin-top: 20px;
+        }
+
+        #heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Happy Valentine's Day, Silvia!</h1>
+        <p>Welcome to your special day filled with love and fun!</p>
+    </header>
+    <main>
+        <section id="games">
+            <h2>Mini-Games</h2>
+            <button onclick="startGame1()">Love Quiz</button>
+            <button onclick="startGame2()">Heart Catcher</button>
+        </section>
+        <section id="gameArea"></section>
+    </main>
+    <footer>
+        <p>Made with ❤️ just for you!</p>
+    </footer>
+    <script>
+        function startGame1() {
+            const quiz = [
+                { question: "What is my favorite color?", answer: "blue" },
+                { question: "What is my favorite food?", answer: "pizza" },
+                { question: "Where did we first meet?", answer: "cafe" }
+            ];
+
+            let score = 0;
+
+            quiz.forEach(q => {
+                const userAnswer = prompt(q.question);
+                if (userAnswer && userAnswer.toLowerCase() === q.answer) {
+                    score++;
+                }
+            });
+
+            alert(`You scored ${score} out of ${quiz.length}!`);
+        }
+
+        function startGame2() {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = '<h2>Catch the Hearts!</h2><div id="heart"></div>';
+            
+            const heart = document.getElementById('heart');
+            let score = 0;
+
+            function moveHeart() {
+                heart.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+                heart.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+            }
+
+            moveHeart();
+
+            heart.onclick = function() {
+                score++;
+                moveHeart();
+            };
+
+            setTimeout(() => {
+                alert(`Game over! Your score is ${score}.`);
+                gameArea.innerHTML = '';
+            }, 30000); // Game lasts for 30 seconds
+        }
+    </script>
+</body>
+</html>
